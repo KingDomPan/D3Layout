@@ -1,0 +1,24 @@
+{
+  "name": "d3",
+  "homepage": "https://github.com/KingDomPan/d3_tree",
+  "authors": [
+    "KingDomPan hua286306956@gmail.com"
+  ],
+  "description": "KingDomPan D3 Tree Demo",
+  "main": "",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "KingDomPan",
+    "D3",
+    "Tree",
+    "Demo"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "c3": "~0.4.10",
+    "font-mfizz": "~2.0.1",
+    "jquery": "~2.1.4"
+  }
+}
