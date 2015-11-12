@@ -5,7 +5,7 @@ var margin = {
     left: 120
   },
   width = 960; //$(window).width() - margin.right - margin.left,
-  height = 800; //$(window).height() - margin.top - margin.bottom;
+height = 800; //$(window).height() - margin.top - margin.bottom;
 
 var i = 0,
   duration = 750,
@@ -152,33 +152,103 @@ function update(source) {
     })
     .remove();
 
+  // FLOWLINK
+  // Enter any new links at the parent's previous position.
+  var link2 = svg.selectAll("path.link2")
+    .data(links, function(d) {
+      return d.target.id;
+    });
+
+  link2.enter().insert("path", "g")
+    .attr("class", "link2")
+    .style("fill", "none")
+    .style("stroke-width", "1.5px")
+    .attr("d", function(d) {
+      var o = {
+        x: source.x0,
+        y: source.y0
+      };
+      return diagonal({
+        source: o,
+        target: o
+      });
+    });
+
+  // Transition links to their new position.
+  link2
+    .attr("d", diagonal)
+    //.transition()
+    //.duration(duration)
+    //.each("end", function() {
+      // d3.select(this)
+      .call(transition);
+    //})
+
+  // Transition exiting nodes to the parent's new position.
+  link2.exit()
+    .attr("d", function(d) {
+      var o = {
+        x: source.x,
+        y: source.y
+      };
+      return diagonal({
+        source: o,
+        target: o
+      });
+    })
+    .remove();
+
+  function transition(tpath) {
+    tpath
+      .transition()
+      .each("start", function() {
+        d3.select(this).style("stroke", "green");
+      })
+      .duration(500)
+      .attrTween("stroke-dasharray", tweenDash)
+      .each("end", function() {
+        d3.select(this).call(transition);
+      });
+  }
+
+  function tweenDash() {
+    var l = this.getTotalLength(),
+      i = d3.interpolateString("0," + l, l + "," + l);
+    return function(t) {
+      return i(t);
+    };
+  }
+
+  // FLOWLINK
+
   // Stash the old positions for transition.
   nodes.forEach(function(d) {
     d.x0 = d.x;
     d.y0 = d.y;
   });
+
 }
 
 // Toggle children on click.
 function toggle(d) {
   // 测试代码, 叶子结点无限扩展
-  if (!d.children && !d._children) {
-    addTheseJSON = {
-      "children": [{
-        "name": "NFR - ercer"
-      }, {
-        "name": "FR - crec"
-      }, {
-        "name": "Granted - rc"
-      }, {
-        "name": "Abandoned - cee"
-      }, {
-        "name": "In-Process - crec"
-      }]
-    };
-    var tem = tree.nodes(addTheseJSON.children).reverse();
-    d._children = tem[0];
-  }
+  // if (!d.children && !d._children) {
+  //   addTheseJSON = {
+  //     "children": [{
+  //       "name": "NFR - ercer"
+  //     }, {
+  //       "name": "FR - crec"
+  //     }, {
+  //       "name": "Granted - rc"
+  //     }, {
+  //       "name": "Abandoned - cee"
+  //     }, {
+  //       "name": "In-Process - crec"
+  //     }]
+  //   };
+  //   var tem = tree.nodes(addTheseJSON.children).reverse();
+  //   d._children = tem[0];
+  // }
   // 测试代码结束
   if (d.children) {
     d._children = d.children;

@@ -1,7 +1,18 @@
 {
   "name": "Applications",
   "children": [{
-    "name": "NFR - 66970"
+    "name": "NFR - 66970",
+    "children": [{
+      "name": "NFR - ercer"
+    }, {
+      "name": "FR - crec"
+    }, {
+      "name": "Granted - rc"
+    }, {
+      "name": "Abandoned - cee"
+    }, {
+      "name": "In-Process - crec"
+    }]
   }, {
     "name": "FR - 231"
   }, {
