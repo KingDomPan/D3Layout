@@ -4,18 +4,15 @@ var margin = {
     bottom: 20,
     left: 120
   },
-  width = $(window).width() - margin.right - margin.left,
-  height = $(window).height() - margin.top - margin.bottom;
+  width = 960; //$(window).width() - margin.right - margin.left,
+  height = 800; //$(window).height() - margin.top - margin.bottom;
 
 var i = 0,
   duration = 750,
   root;
 
 var tree = d3.layout.tree()
-  .size([height, width])
-  .separation(function(a, b) {
-    return a.parent == b.parent ? 50 : 20;
-  });
+  .size([height, width]);
 
 var diagonal = d3.svg.diagonal()
   .projection(function(d) {
@@ -113,7 +110,7 @@ function update(source) {
     .remove();
 
   nodeExit.select("text")
-    .style("fill-opacity", 1e-6);
+    .style("fill-opacity", 1);
 
   // Update the links...
   var link = svg.selectAll("path.link")
@@ -217,3 +214,9 @@ d3.select("svg")
 function zoom() {
   d3.select("svg g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 }
+
+
+var canvas = d3.demo.canvas().width(960).height(800);
+d3.select("#canvas").call(canvas);
+
+canvas.addItem(svg);

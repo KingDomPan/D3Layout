@@ -2,34 +2,27 @@
 <html lang="en" style="margin: 0px; padding: 0px;">
 <head>
   <meta charset="utf-8">
-  <title>Collapsible Tree Example</title>
+  <title>FishEye Tree Example</title>
   <link rel="stylesheet" type="text/css" href="../bower_components/font-mfizz/css/font-mfizz.css">
   <style type="text/css">
-    .node circle {
-      fill: #fff;
-      stroke: steelblue;
-      stroke-width: 3px;
+    .text {
+      font: bold 8px sans-serif;
     }
-    .node text {
-      font: 12px sans-serif;
-    }
-    .link {
+    .edge {
       fill: none;
       stroke: #ccc;
-      stroke-width: 5px;
+      stroke-width: 1.5px;
     }
-    .link2 {
-      fill: none;
-      stroke: #ccc;
-      stroke-width: 5px;
+    rect.background{
+      fill:none;
+      stroke:gray;
+      pointer-events:all;
     }
   </style>
 
 </head>
 <body>
-  <p></p>
-  <p></p>
-  <p></p>
+  <div id="graph"></div>
 </body>
 
 </html>

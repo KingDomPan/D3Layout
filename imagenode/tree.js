@@ -100,6 +100,39 @@ function update(source) {
       return "translate(" + d.y + "," + d.x + ")"; // 容器的位置就是结点的位置
     }); // 此时宽和高都是0
 
+  // links.forEach(function(l) {
+  //   // 对每一个连线的源结点, 创建运动的小点点
+  //   svg.append("circle")
+  //     .attr("r", "8px")
+  //     .attr("class", "dcircle")
+  //     .attr("cx", l.source.y)
+  //     .attr("cy", l.source.x)
+  //     .attr("stroke", "steelblue")
+  //     .attr("stroke-width", "2px")
+  //     .attr("opacity", 0.5)
+  //     .attr("target", l.target.id)
+  //     .attr("path", l);
+  // });
+
+  // var xxx = svg.selectAll("circle.dcircle")
+  //   .data(links)
+  //   .enter()
+  //   .append("circle")
+  //   .attr("r", "8px")
+  //   .attr("class", "dcircle")
+  //   .attr("cx", function(l) {
+  //     return l.source.y;
+  //   })
+  //   .attr("cy", function(l) {
+  //     return l.source.x;
+  //   })
+  //   .attr("stroke", "steelblue")
+  //   .attr("stroke-width", "2px")
+  //   .attr("opacity", 0.5)
+  //   .attr("target", function(l) {
+  //     return l.target.id;
+  //   })
+
   nodeEnter.append("image")
     .attr("xlink:href", function(d) {
       return "../font-mfizz/src/svg/apache.svg";
@@ -129,10 +162,65 @@ function update(source) {
     });
 
   // Enter the links.
-  link.enter().insert("path", "g")
+  var path = link.enter().insert("path", "g")
     .attr("class", "link")
+    
+    .attr("target", function(d) {
+      return d.target.id;
+    })
+    .style("stroke-dasharray", "4,4")
+    .attr("d", diagonal);
+
+  var link2 = svg.selectAll("path.link2")
+    .data(links, function(l) {
+      return l.target.id;
+    });
+
+  // Enter the links.
+  var path2 = link2.enter().insert("path", "g")
+    .attr("d", diagonal)
+    .attr("class", "link2")
     .style("stroke", function(d) {
       return d.target.level;
     })
-    .attr("d", diagonal);
+    .call(transition);
+
+  function transition(tpath) {
+    tpath.transition()
+      .duration(7500)
+      .attrTween("stroke-dasharray", tweenDash)
+      .each("end", function() {
+        d3.select(this).call(transition);
+      });
+  }
+
+  function tweenDash() {
+    var l = this.getTotalLength(),
+      i = d3.interpolateString("0," + l, l + "," + l);
+    return function(t) {
+      return i(t);
+    };
+  }
+
+  /**
+  function transition() {
+    svg.select("circle.dcircle[target='1']")
+      .transition()
+      .duration(5000)
+      .attrTween("transform", translateAlong(svg.select("path.link[target='1']").node()))
+      .each("end", transition);
+  }
+
+  // Returns an attrTween for translating along the specified path element.
+  function translateAlong(path) {
+    var l = path.getTotalLength(); // 整个线段长度
+    return function(d, i, a) {
+      return function(t) {
+        var p = path.getPointAtLength(t * l);
+        return "translate(" + p.x + "," + p.y + ")";
+      };
+    };
+  }
+  // transition();
+  */
 }
