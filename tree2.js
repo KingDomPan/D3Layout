@@ -31,27 +31,25 @@ d3.json("flare.json", function(json) {
   }
 
   // Initialize the display to show a few nodes.
-  root.children.forEach(toggleAll);
-  toggle(root.children[1]);
-  toggle(root.children[1].children[2]);
-  toggle(root.children[9]);
-  toggle(root.children[9].children[0]);
+  // root.children.forEach(toggleAll);
+  // toggle(root.children[1]);
+  // toggle(root.children[1].children[2]);
+  // toggle(root.children[9]);
+  // toggle(root.children[9].children[0]);
 
   update(root);
 });
 
 function update(source) {
   var duration = d3.event && d3.event.altKey ? 5000 : 500;
-
   // Compute the new tree layout.
   var nodes = tree.nodes(root).reverse();
-
   // Normalize for fixed-depth.
   nodes.forEach(function(d) {
     d.y = d.depth * 180;
   });
 
-  // Update the nodes…
+  // Update the node...
   var node = vis.selectAll("g.node")
     .data(nodes, function(d) {
       return d.id || (d.id = ++i);

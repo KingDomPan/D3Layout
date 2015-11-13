@@ -204,7 +204,7 @@ function update(source) {
       .each("start", function() {
         d3.select(this).style("stroke", "green");
       })
-      .duration(500)
+      .duration(10000)
       .attrTween("stroke-dasharray", tweenDash)
       .each("end", function() {
         d3.select(this).call(transition);
