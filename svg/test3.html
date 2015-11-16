@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+  <div style="position: absolute; top: 200px; left: 200px; width: 900px; height: 800px; border: 2px red solid;">
+    <!--
+      ViewBox:
+        它声明了一个特定的区域, canvas横跨左上角的点(-15, -15)到点(200, 150)
+        SVG图像被这个区域裁切
+        区域被拉伸(类似缩放效果)来充满整个视窗
+        用户坐标系被映射到视窗坐标系, 在这种情况下, 一个用户单位等于四个视窗单位
+        rect变成15 15 80 80
+        transform="translate(15 15)"
+    -->
+    <svg width="800" height="600" viewBox="-15 -15 200 150">
+      <rect x="10" y="10" width="20" height="20" />
+    </svg>
+  </div>
+</body>
+</html>
