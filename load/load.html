@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    circle {
+        -webkit-transition: stroke-dasharray .25s;
+        transition: stroke-dasharray .25s;
+    }
+  </style>
+</head>
+<body>
+  <svg>
+    <g>
+      <circle cx="20" cy="20" r="10" stroke-width="10" stroke="#D1D3D7" fill="none"></circle>
+      <circle cx="20" cy="20" r="10" stroke-width="10" stroke="#00A5E0" fill="none" transform="matrix(0,-1,1,0,0,40)" stroke-dasharray="0 1069"></circle>
+      <g><image xlink:href="../font-mfizz/src/svg/apache.svg" x="0" y="0" width="40" height="40" /></g>
+    <g>
+  </svg>
+<p>拖我：<input id="range" type="range" min="0" max="100" value="0" style="width:300px;"></p>
+
+</body>
+</html>
+<script type="text/javascript" src="../bower_components/react/react.min.js"></script>
+<script type="text/javascript" src="../bower_components/react/JSXTransformer.js"></script>
+<script type="text/javascript" src="load.js"></script>
