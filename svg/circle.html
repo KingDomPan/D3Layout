@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    * {
+      margin: 0px;
+      padding: 0px;
+    }
+  </style>
+</head>
+<body>
+<svg id="svgout" width="100%" height="100%">
+</svg>
+</body>
+</html>
+<script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../bower_components/Snap.svg/dist/snap.svg-min.js"></script>
+<script type="text/javascript">
+  var s = Snap("#svgout");
+  s.attr({
+    viewBox: "0 0 600 600"
+  });
+  var r = s.rect(100, 100, 100, 100, 20, 20).attr({
+    stroke: '#123456',
+    'strokeWidth': 20,
+    fill: 'red',
+    'opacity': 0.2
+  });
+  console.dir(r.getBBox());
+</script>
