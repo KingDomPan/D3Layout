@@ -52,6 +52,20 @@ var treeData = [{
   }]
 }];
 
+var defaultConfig = liquidFillGaugeDefaultSettings();
+defaultConfig.circleColor = "#D4AB6A";
+defaultConfig.textColor = "#553300";
+defaultConfig.waveTextColor = "#805615";
+defaultConfig.waveColor = "#AA7D39";
+defaultConfig.circleThickness = 0.1;
+defaultConfig.circleFillGap = 0.2;
+defaultConfig.textVertPosition = 0.8;
+defaultConfig.waveAnimateTime = 2000;
+defaultConfig.waveHeight = 0.3;
+defaultConfig.waveCount = 1;
+
+var emitter = new EventEmitter2();
+
 (function () {
   "use strict";
 
@@ -65,8 +79,8 @@ var treeData = [{
     left: baseMargin
   };
 
-  var baseWidth = 720;
-  var baseHeight = 480;
+  var baseWidth = 960;
+  var baseHeight = 640;
 
   // Svg画布总的范围
   var realWidth = baseWidth + 2 * baseMargin;
@@ -86,7 +100,6 @@ var treeData = [{
   var i = 0;
 
   var treePercent = 0.6;
-  var podPercent = 1 - treePercent;
 
   var tree = d3.layout.tree()
     .size([height, width * treePercent]);
@@ -145,7 +158,7 @@ var treeData = [{
       .attr("width", "50px") // 设置svg图片大小
       .attr("height", "50px")
       .attr("class", function (d) {
-        return "ImageNodeClass" + d.id;
+        return "ImageNodeClass" + d.id + " TreeNodeImage";
       });
 
     nodeEnter.append("text")
@@ -184,43 +197,71 @@ var treeData = [{
     x: width * treePercent + margin.left,
     y: margin.top
   };
-  console.log(gPodBasePoint)
-  // 创建三个平行的圆试试看
+
+  // 创建七个平行的圆试试看
   var r = 25;
-  for (var i = 1; i <= 3; i++) {
-    SnapSvg.append(SnapSvg.circle(gPodBasePoint.x + ( 2 * i - 1 ) * r, gPodBasePoint.y + r, r).attr({
-      fill: "none",
-      stroke: "red",
-      "stroke-width": 2
-    }));
+  //for (var m = 1; m <= 7; m++) {
+  //  SnapSvg.append(SnapSvg.circle(gPodBasePoint.x + ( 2 * m - 1 ) * r, gPodBasePoint.y + r, r).attr({
+  //    fill: "none",
+  //    stroke: "red",
+  //    "stroke-width": 2
+  //  }));
+  //}
+
+  // 创建7个平行的水波图标来看看吧
+  var w = 50;
+  var h = 50;
+  for (var m = 0; m < 7; m++) {
+    var waveSnap = Snap(w, h).attr({
+      x: gPodBasePoint.x + m * w,
+      y: gPodBasePoint.y,
+      id: "WaveSnapSvg" + m + 1,
+      style: "width: " + w + "px; height: " + h + "px"
+    }).appendTo(SnapSvg);
+    var q = loadLiquidFillGauge(waveSnap.attr("id"), 0, defaultConfig);
+    emitter.on("UploadWave" + (m + 1), q.update);
   }
 
   // 来个动画吧
-  var bbox = SnapSvg.select(".ImageNodeClass1").getBBox();
-  console.dir(SnapSvg.select(".ImageNodeClass1").transform());
-  var trans = SnapSvg.select(".ImageNodeClass1").transform().globalMatrix;
-  console.dir(SnapSvg.select(".ImageNodeClass1").node.getBoundingClientRect());
+  //var rect = SnapSvg.select(".ImageNodeClass1").node.getBoundingClientRect();
+  //
+  //var clone = SnapSvg.select(".ImageNodeClass1")
+  //  .clone();
+  //
+  //clone.attr({
+  //    x: rect.left,
+  //    y: rect.top
+  //  });
+  //
+  //clone.prependTo(SnapSvg);
+  //clone
+  //  .animate({
+  //    fill: "#00f",
+  //    x: gPodBasePoint.x,
+  //    y: gPodBasePoint.y
+  //  }, 2000, mina.backout, function () {
+  //
+  //  });
 
-  console.dir(trans);
-  console.log(trans.x(bbox.cx, bbox.cy));
-  console.log(trans.y(bbox.cx, bbox.cy));
+  // 来7个动画吧
+  var images = SnapSvg.selectAll("image.TreeNodeImage");
 
-
-  var clone = SnapSvg.select(".ImageNodeClass1")
-    .clone();
-
-  clone.attr({
-      x: trans.x(bbox.cx, bbox.cy) - 10,
-      y: trans.y(bbox.cx, bbox.cy) - 30
+  images.forEach(function (ele, index) {
+    var self = ele;
+    var rect = self.node.getBoundingClientRect();
+    var clone = self.clone();
+    clone.attr({
+      x: rect.left,
+      y: rect.top
     });
-
-  clone.prependTo(SnapSvg);
-  clone
-    .animate({
-      fill: "#00f",
-      x: gPodBasePoint.x,
-      y: gPodBasePoint.y
-    }, 2000, mina.linear, function () {
-
-    });
+    clone.prependTo(SnapSvg);
+    clone
+      .animate({
+        fill: "#00f",
+        x: gPodBasePoint.x + index * 2 * r,
+        y: gPodBasePoint.y
+      }, 10000, mina.easein, function () {
+        emitter.emit("UploadWave" + (index + 1), 50);
+      });
+  });
 })();
