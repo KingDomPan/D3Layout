@@ -21,11 +21,75 @@
   s.attr({
     viewBox: "0 0 600 600"
   });
-  var r = s.rect(100, 100, 100, 100, 20, 20).attr({
-    stroke: '#123456',
-    'strokeWidth': 20,
-    fill: 'red',
-    'opacity': 0.2
+
+  var cg = s.g();
+  for(var i = 0; i < 5; i ++) {
+    var r = s.circle(100 * i + 30, 30, 25).attr({
+      stroke: '#654321',
+      'opacity': 0.5,
+      'fill': '#acefbc',
+      'class': "circle" + i
+    });
+    cg.add(r);
+  }
+
+  var g = s.g();
+  for(var i = 0; i < 5; i ++) {
+    var r = s.rect(100 * i + 30, 130, 50, 50).attr({
+      stroke: '#123456',
+      'opacity': 0.5,
+      'fill': '#ffdcef',
+      'class': "rect" + i
+    });
+    g.add(r);
+  }
+
+  // cg.select(".circle1").clone().animate({
+  //   fill: "#00f",
+  //   cx: g.select(".rect2").getBBox().cx,
+  //   cy: g.select(".rect2").getBBox().cy
+  // }, 2000, mina.bounce, function() {
+  //   this.remove();
+  //   g.select(".rect2").animate({
+  //     fill: "red",
+  //     x: g.select(".rect4").getBBox().x,
+  //     y: g.select(".rect4").getBBox().y
+  //   }, 2000, mina.backout, function() {
+  //     this.remove();
+  //     g.select(".rect4").animate({
+  //       fill: "blue"
+  //     }, 2000)
+  //   });
+  // });
+
+  var pro = new Promise(function(resolve, reject) {
+    var target = g.select(".rect2");
+    cg.select(".circle1").animate({
+      fill: "#00f",
+      cx: target.getBBox().cx,
+      cy: target.getBBox().cy
+    }, 4000, mina.bounce, function() {
+      resolve(target);
+    });
   });
-  console.dir(r.getBBox());
+
+  pro
+    .then(function(t) {
+      return new Promise(function(resolve, reject) {
+        var tt = g.select(".rect4")
+        t.animate({
+          fill: "red",
+          x: tt.getBBox().x,
+          y: tt.getBBox().y
+        }, 4000, mina.bounce, function() {
+          resolve(tt);
+        });
+      });
+    })
+    .then(function(t) {
+      t.animate({
+        fill: "blue"
+      }, 4000)
+    });
+
 </script>
