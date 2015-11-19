@@ -35,9 +35,13 @@ function loadLiquidFillGauge(elementId, value, config) {
 
   var gauge = d3.select("#" + elementId);
 
-  var radius = Math.min(parseInt(gauge.style("width")), parseInt(gauge.style("height"))) / 2;
-  var locationX = parseInt(gauge.style("width")) / 2 - radius;
-  var locationY = parseInt(gauge.style("height")) / 2 - radius;
+  // 解决firefox, chrome下 Svg嵌套width, height解释行为不一致的问题
+  var gwidth = gauge.style("width") === 'auto' ? gauge.attr("width") : gauge.style("width");
+  var gheight = gauge.style("height") === 'auto' ? gauge.attr("height") : gauge.style("height");
+
+  var radius = Math.min(parseInt(gwidth), parseInt(gheight)) / 2;
+  var locationX = parseInt(gwidth) / 2 - radius;
+  var locationY = parseInt(gheight) / 2 - radius;
   var fillPercent = Math.max(config.minValue, Math.min(config.maxValue, value)) / config.maxValue;
 
   var waveHeightScale;

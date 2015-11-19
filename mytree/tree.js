@@ -212,13 +212,16 @@ var emitter = new EventEmitter2();
   var w = 50;
   var h = 50;
   for (var m = 0; m < 7; m++) {
-    var waveSnap = Snap(w, h).attr({
+    var id = "WaveSnapSvg" + (m + 1);
+    Snap(w, h).attr({
       x: gPodBasePoint.x + m * w,
       y: gPodBasePoint.y,
-      id: "WaveSnapSvg" + m + 1,
-      style: "width: " + w + "px; height: " + h + "px"
+      id: id,
+      style: "width: " + w + "px; height: " + h + "px",
+      width: w,
+      height: h
     }).appendTo(SnapSvg);
-    var q = loadLiquidFillGauge(waveSnap.attr("id"), 0, defaultConfig);
+    var q = loadLiquidFillGauge(id, 0, defaultConfig);
     emitter.on("UploadWave" + (m + 1), q.update);
   }
 
@@ -260,7 +263,7 @@ var emitter = new EventEmitter2();
         fill: "#00f",
         x: gPodBasePoint.x + index * 2 * r,
         y: gPodBasePoint.y
-      }, 10000, mina.easein, function () {
+      }, 2000, mina.easein, function () {
         emitter.emit("UploadWave" + (index + 1), 50);
       });
   });
