@@ -318,7 +318,7 @@ var emitter = new EventEmitter2();
 
   // window.setInterval(func, 6000);
 
-  setInterval(function() {
+  setTimeout(function() {
     var shang = 2;
     for (var l = 1; l <= shang; l++) {
 
