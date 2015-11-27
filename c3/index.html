@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="/bower_components/c3/c3.css">
+</head>
+<body>
+  <div id="panqd"></div>
+  <div id="loading"></div>
+</body>
+</html>
+<script type="text/javascript" src="../bower_components/d3/d3.min.js"></script>
+<script type="text/javascript" src="/bower_components/c3/c3.min.js"></script>
+<script type="text/javascript" src="/bower_components/spin.js/spin.min.js"></script>
+<script type="text/javascript">
+  var opts = {
+    lines: 13,
+    length: 28,
+    width: 14,
+    radius: 42,
+    scale: 1,
+    corners: 1,
+    color: '#000',
+    opacity: 0.25,
+    rotate: 0,
+    direction: 1,
+    speed: 1,
+    trail: 60,
+    fps: 20,
+    zIndex: 2e9,
+    className: 'spinner',
+    top: '50%',
+    left: '50%',
+    shadow: false,
+    hwaccel: false,
+    position: 'absolute'
+  };
+
+</script>
+<script type="text/javascript">
+  var chart = c3.generate({
+    bindto: '#panqd',
+    data: {
+      columns: [
+        ['data1', 30, 200, 100, 400, 150, 250],
+        ['data2', 50, 20, 10, 40, 15, 25]
+      ],
+      types: {
+        data1: 'bar',
+        data2: 'spline'
+      }
+    },
+    size: {
+      width: 250,
+      height: 250
+    },
+    color: {
+      pattern: ['#1f77b4', '#aec7e8']
+    },
+    interaction: {
+      enabled: true
+    },
+    transition: {
+      duration: 100
+    },
+    onrendered: function() {
+      console.log('panqd');
+    },
+    zoom: {
+      enabled: true
+    }
+  });
+
+
+</script>
+
+<script type="text/javascript">
+
+  function loadData() {
+    return new Promise(function(resolve, reject) {
+      resolve(true);
+    });
+  }
+
+  var getData = loadData();
+  getData
+    .then(function(isLoading) {
+      if (isLoading) {
+        window.spinner = new Spinner(opts).spin(document.getElementById('loading'));
+        return new Promise(function(resolve, reject) {
+          var data = [
+            ['data1', 300, 200, 300, 400, 300, 600, 700],
+            ['data2', 100, 200, 100, 50, 100, 250]
+          ]
+          window.setTimeout(function(){
+            resolve(data);
+          }, 1000);
+        });
+      }
+    }, function() {
+
+    })
+    .then(function(data) {
+      chart.load({
+        columns: data
+      });
+      chart.axis.min({
+        x: -1,
+        y: 50
+      });
+      window.spinner.stop();
+    }, function() {
+
+    });
+
+</script>

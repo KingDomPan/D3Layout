@@ -25,6 +25,9 @@
     "react": "~0.13.3",
     "snap": "*",
     "Snap.svg": "~0.4.1",
-    "eventemitter2": "~0.4.14"
+    "eventemitter2": "~0.4.14",
+    "spin.js": "~2.3.1",
+    "ember": "1.0.0",
+    "handlebars": "1.3.0"
   }
 }
