@@ -1,0 +1,46 @@
+{
+  "name": "Java服务",
+  "children": [{
+    "name": "1-2s",
+    "children": [{
+      "name": "Method1",
+      "num": "100"
+    }, {
+      "name": "Method11",
+      "num": "100"
+    }, {
+      "name": "Method111",
+      "num": "100"
+    }, {
+      "name": "Method1111",
+      "num": "100"
+    }]
+  }, {
+    "name": "2-5s",
+    "children": [{
+      "name": "Method2",
+      "num": "100"
+    }, {
+      "name": "Method21",
+      "num": "100"
+    }]
+  }, {
+    "name": "5-8s",
+    "children": [{
+      "name": "Method3",
+      "num": "100"
+    }, {
+      "name": "Method31",
+      "num": "100"
+    }]
+  }, {
+    "name": "8-10s",
+    "children": [{
+      "name": "Method4",
+      "num": "100"
+    }, {
+      "name": "Method41",
+      "num": "100"
+    }]
+  }]
+}
