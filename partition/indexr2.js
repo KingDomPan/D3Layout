@@ -1,16 +1,16 @@
-var w = 960,
-  h = 500,
+var w = 700,
+  h = 700,
   x = d3.scale.linear().range([0, w]),
   y = d3.scale.linear().range([0, h]),
   color = d3.scale.category20();
 
 var vis = d3.select("#body").append("div")
-  .attr("class", "chart")
-  .style("width", w + "px")
-  .style("height", h + "px")
+  .style("width", "100%")
+  .style("height", "100%")
   .append("svg")
-  .attr("width", w)
-  .attr("height", h);
+  .attr("width", '100%')
+  .attr("height", '100%')
+  .attr("viewBox", "0 0 " + w + " " + h);
 
 var partition = d3.layout.partition()
   .value(function(d) {
