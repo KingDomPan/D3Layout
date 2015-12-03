@@ -1,0 +1,207 @@
+<svg id="radar" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <circle fill="#CCC" cx="64" cy="64" r="36"/>
+  <defs>
+    <filter id="OMF" filterUnits="userSpaceOnUse" x="29" y="29" width="70" height="70">
+      <feFlood style="flood-color:white;flood-opacity:1" result="back"/>
+      <feBlend in="SourceGraphic" in2="back" mode="normal"/>
+    </filter>
+    <style type="text/css">
+      <![CDATA[
+        #radar #scanner,
+        #radar #scanner-lines {
+          -webkit-transform-origin: 64px 64px;
+          -moz-transform-origin: 64px 64px;
+          -ms-transform-origin: 64px 64px;
+          -o-transform-origin: 64px 64px;
+          transform-origin: 64px 64px;
+          -webkit-animation: scan 2.5s linear infinite;
+          -moz-animation: scan 2.5s linear infinite;
+          animation: scan 2.5s linear infinite;
+        }
+        #radar #dots circle {
+          opacity: 0;
+          -webkit-animation: pulse 2.5s linear infinite;
+          -moz-animation: pulse 2.5s linear infinite;
+          animation: pulse 2.5s linear infinite;
+        }
+        #radar #dots circle:nth-child(1) {
+          -webkit-animation-delay: -0.5s;
+          -moz-animation-delay: -0.5s;
+          animation-delay: -0.5s;
+        }
+        #radar #dots circle:nth-child(2) {
+          -webkit-animation-delay: -2.2s;
+          -moz-animation-delay: -2.2s;
+          animation-delay: -2.2s;
+        }
+        #radar #dots circle:nth-child(3) {
+          -webkit-animation-delay: -1.4s;
+          -moz-animation-delay: -1.4s;
+          animation-delay: -1.4s;
+        }
+
+        @-webkit-keyframes scan {
+          to {
+            -webkit-transform: rotate(360deg);
+          }
+        }
+        @-moz-keyframes scan {
+          to {
+            -moz-transform: rotate(360deg);
+          }
+        }
+        @-o-keyframes scan {
+          to {
+            -o-transform: rotate(360deg);
+          }
+        }
+        @keyframes scan {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        @-webkit-keyframes pulse {
+          0% {
+            opacity: 1;
+          }
+
+          80%, 100% {
+            opacity: 0;
+          }
+        }
+        @-moz-keyframes pulse {
+          0% {
+            opacity: 1;
+          }
+
+          80%, 100% {
+            opacity: 0;
+          }
+        }
+        @-o-keyframes pulse {
+          0% {
+            opacity: 1;
+          }
+
+          80%, 100% {
+            opacity: 0;
+          }
+        }
+        @keyframes pulse {
+          0% {
+            opacity: 1;
+          }
+
+          80%, 100% {
+            opacity: 0;
+          }
+        }
+      ]]>
+    </style>
+  </defs>
+  <mask maskUnits="userSpaceOnUse" x="29" y="29" width="70" height="70" id="S1">
+    <g filter="url(#OMF)">
+      <circle cx="64" cy="67.5" r="37"/>
+    </g>
+  </mask>
+  <circle mask="url(#S1)" fill="#E6E6E6" cx="64" cy="64" r="35"/>
+  <defs>
+    <filter id="O1" filterUnits="userSpaceOnUse" x="29" y="29" width="70" height="70">
+      <feFlood style="flood-color:white;flood-opacity:1" result="back"/>
+      <feBlend in="SourceGraphic" in2="back" mode="normal"/>
+    </filter>
+  </defs>
+  <mask maskUnits="userSpaceOnUse" x="29" y="29" width="70" height="70" id="S2">
+    <g filter="url(#O1)">
+      <circle cx="64" cy="60.5" r="37"/>
+    </g>
+  </mask>
+  <circle mask="url(#S2)" fill="#B3B3B3" cx="64" cy="64" r="35"/>
+  <radialGradient id="S3" cx="64" cy="64" r="32" gradientUnits="userSpaceOnUse">
+    <stop offset="0.35" style="stop-color:#468BAD"/>
+    <stop offset="0.5178" style="stop-color:#4486A7"/>
+    <stop offset="0.7374" style="stop-color:#3D7997"/>
+    <stop offset="0.9848" style="stop-color:#32637C"/>
+    <stop offset="1" style="stop-color:#31617A"/>
+  </radialGradient>
+  <circle fill="url(#S3)" cx="64" cy="64" r="32"/>
+  <linearGradient id="S4" gradientUnits="userSpaceOnUse" x1="32.9995" y1="64" x2="95" y2="64">
+    <stop offset="0" style="stop-color:#5FAACF;stop-opacity:0.25"/>
+    <stop offset="0.5" style="stop-color:#5FAACF"/>
+    <stop offset="1" style="stop-color:#5FAACF;stop-opacity:0.25"/>
+  </linearGradient>
+  <line fill="none" stroke="url(#S4)" stroke-width="0.5" stroke-miterlimit="10" x1="33" y1="64" x2="95" y2="64"/>
+  <linearGradient id="S5" gradientUnits="userSpaceOnUse" x1="32.999" y1="64" x2="94.999" y2="64" gradientTransform="matrix(0 1 -1 0 128 9.765625e-004)">
+    <stop offset="0" style="stop-color:#5FAACF;stop-opacity:0.25"/>
+    <stop offset="0.5" style="stop-color:#5FAACF"/>
+    <stop offset="1" style="stop-color:#5FAACF;stop-opacity:0.25"/>
+  </linearGradient>
+  <line fill="none" stroke="url(#S5)" stroke-width="0.5" stroke-miterlimit="10" x1="64" y1="33" x2="64" y2="95"/>
+  <g fill="none" stroke="#5FAACF" stroke-width="0.5" stroke-miterlimit="10">
+    <circle opacity="0.6" cx="64" cy="64" r="24"/>
+    <circle opacity="0.8" cx="64" cy="64" r="16"/>
+    <circle cx="64" cy="64" r="8"/>
+  </g>
+  <defs>
+    <filter id="O2" filterUnits="userSpaceOnUse" x="39.75" y="39.75" width="48.5" height="48.5">
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+    </filter>
+  </defs>
+  <mask maskUnits="userSpaceOnUse" x="39.75" y="39.75" width="48.5" height="48.5" id="scanner-lines_1">
+    <g filter="url(#O2)">
+      <linearGradient id="S6" gradientUnits="userSpaceOnUse" x1="54.502" y1="53.4839" x2="78.0833" y2="39.8692">
+        <stop offset="0" style="stop-color:#000"/>
+        <stop offset="0.1012" style="stop-color:#3D3D3D"/>
+        <stop offset="0.2105" style="stop-color:#777"/>
+        <stop offset="0.3163" style="stop-color:#A8A8A8"/>
+        <stop offset="0.4157" style="stop-color:#CECECE"/>
+        <stop offset="0.5073" style="stop-color:#E9E9E9"/>
+        <stop offset="0.5882" style="stop-color:#F9F9F9"/>
+        <stop offset="0.65" style="stop-color:#FFFFFF"/>
+      </linearGradient>
+      <rect x="32" y="32" fill="url(#S6)" width="64" height="32"/>
+    </g>
+  </mask>
+  <g transform="translate(0, 0)">
+    <g id="scanner-lines" mask="url(#scanner-lines_1)" fill="none" stroke="#B0D7E9" stroke-width="0.5" stroke-miterlimit="10">
+      <circle opacity="0.6" cx="64" cy="64" r="24"/>
+      <circle opacity="0.8" cx="64" cy="64" r="16"/>
+      <circle cx="64" cy="64" r="8"/>
+    </g>
+  </g>
+  <g id="dots" fill="#A0D8F3">
+    <circle cx="70" cy="41" r="1.5"/>
+    <circle cx="70" cy="69" r="1.5"/>
+    <circle cx="50" cy="72" r="1.5"/>
+  </g>
+  <g transform="translate(0, 0)">
+    <g id="scanner">
+      <defs>
+        <filter id="O3" filterUnits="userSpaceOnUse" x="33" y="33" width="62" height="62">
+          <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 1 0"/>
+        </filter>
+      </defs>
+      <mask maskUnits="userSpaceOnUse" x="33" y="33" width="62" height="62" id="S7">
+        <g filter="url(#O3)">
+          <linearGradient id="S8" gradientUnits="userSpaceOnUse" x1="80" y1="64" x2="80" y2="32">
+            <stop offset="0" style="stop-color:#FFFFFF"/>
+            <stop offset="0.095" style="stop-color:#F9F9F9"/>
+            <stop offset="0.2196" style="stop-color:#E9E9E9"/>
+            <stop offset="0.3605" style="stop-color:#CECECE"/>
+            <stop offset="0.5134" style="stop-color:#A8A8A8"/>
+            <stop offset="0.6761" style="stop-color:#777"/>
+            <stop offset="0.8443" style="stop-color:#3D3D3D"/>
+            <stop offset="1" style="stop-color:#000"/>
+          </linearGradient>
+          <rect x="64" y="32" fill="url(#S8)" width="32" height="32"/>
+        </g>
+      </mask>
+      <linearGradient id="S9" gradientUnits="userSpaceOnUse" x1="34.7725" y1="56.1685" x2="94.674" y2="72.219">
+        <stop offset="0.5" style="stop-color:#B8E0F3;stop-opacity:0"/>
+        <stop offset="1" style="stop-color:#B8E0F3"/>
+      </linearGradient>
+      <circle mask="url(#S7)" fill="url(#S9)" cx="64" cy="64" r="31"/>
+      <line fill="none" stroke="#E8F0F3" stroke-linecap="round" stroke-miterlimit="10" x1="64" y1="64" x2="94.5" y2="64"/>
+    </g>
+  </g>
+</svg>
