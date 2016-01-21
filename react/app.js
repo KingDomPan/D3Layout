@@ -81,10 +81,15 @@ App.ApiData = [{
   "parent": 7
 }];
 
+function mapProperty(array, property) {
+  return array.map(function(obj) {
+    return obj[property] || 0;
+  });
+}
+
 App.ChromeDevToolsTimetreeView = Ember.Timetree.TimetreeView.extend({
   timeTickFormat: Ember.computed(function() {
-    var minTime = this.get('xScale').domain()[0];
-    var minTime = d3.min(this.content.mapProperty('start'));
+    var minTime = d3.min(mapProperty(this.content, 'start'));
     return function(d) {
       return parseInt(d - minTime) + 'ms';
     };
