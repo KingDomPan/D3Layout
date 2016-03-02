@@ -21,7 +21,6 @@ var zoom = d3.behavior.zoom()
     d3.select("svg g").attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
   });
 
-// 
 var drag = d3.behavior.drag()
   .origin(function() {
     var t = d3.transform(d3.select(this).attr("transform"));
